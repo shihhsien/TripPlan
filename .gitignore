@@ -1,3 +1,6 @@
+# Files that are customized (e.g. private API keys)
+config.yaml
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

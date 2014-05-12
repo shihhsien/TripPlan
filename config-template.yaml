@@ -1,0 +1,10 @@
+# Yelp
+yelp:
+    api:
+        v1.0:
+            ywsid: insert_here
+        v2.0:
+            consumer_key: insert_here
+            consumer_secret: insert_here
+            token: insert_here
+            token_secret: insert_here

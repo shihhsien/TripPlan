@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.conf import settings
-import oauth2, yaml, urllib
+from HTMLParser import HTMLParser
+import oauth2, yaml, urllib, json
 
 # remove below to api.py in yelp
 
@@ -15,7 +16,7 @@ def view(request):
 	consumer = oauth2.Consumer(consumer_key, consumer_secret)
 
 	# Modify the url below for customized search
-	url = 'http://api.yelp.com/v2/search?term=bars&location=sf'
+	url = 'http://api.yelp.com/v2/search?term=bars&limit=1&location=sf'
 
 	# Signing the url with API keys
 	oauth_request = oauth2.Request('GET', url, {})
@@ -35,5 +36,11 @@ def view(request):
 	raw_yelp_data = yelp_url_connection.read()
 	yelp_url_connection.close()
 
-	# html = signed_url
-	return HttpResponse(raw_yelp_data)
+	 # Convert json to python dictionary
+	json_yelp_dict = json.loads(raw_yelp_data)
+	
+
+	# Accessing python dictionary
+	html = json_yelp_dict['businesses'][0]["name"]
+
+	return HttpResponse(html)

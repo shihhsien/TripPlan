@@ -8,6 +8,7 @@ Environment Setup
 Configuration
 =================
 * Modify config-template.yaml file with your settings and save it as config.yaml
+
 Yelp
 -----------------
 1. Sign up for Yelp API key at http://www.yelp.com/developers/getting_started/api_access

@@ -82,3 +82,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 HELLO = "hi"
 CONFIG = yaml.safe_load(open('config.yaml'))
+TEMPLATE_DIRS = [os.path.join('/TripPlan/templates/')]

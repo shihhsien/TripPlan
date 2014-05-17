@@ -1,11 +1,11 @@
 from django.http import HttpResponse
 from django.conf import settings
-from HTMLParser import HTMLParser
+from django.template import Context, loader, Template
 import oauth2, yaml, urllib, json
 
 # remove below to api.py in yelp
 
-def view(request):
+def index(request):
 
 	# Defining API keys provided by Yelp and stored in config.yaml
 	consumer_key = settings.CONFIG['yelp']['api']['v2.0']['consumer_key']
@@ -16,7 +16,7 @@ def view(request):
 	consumer = oauth2.Consumer(consumer_key, consumer_secret)
 
 	# Modify the url below for customized search
-	url = 'http://api.yelp.com/v2/search?term=bars&limit=1&location=sf'
+	url = 'http://api.yelp.com/v2/search?term=bars&limit=5&location=sf'
 
 	# Signing the url with API keys
 	oauth_request = oauth2.Request('GET', url, {})
@@ -37,10 +37,29 @@ def view(request):
 	yelp_url_connection.close()
 
 	 # Convert json to python dictionary
-	json_yelp_dict = json.loads(raw_yelp_data)
+	yelp_python_dict = json.loads(raw_yelp_data)
 	
+	raw_template = """
+	<head>
+		<title>Yelp Page</title>	
+	</head>
+
+	<body>
+		<h1>Yelp Results </h1>
+
+		{% for business in businesses %}
+			<h1>{{ business.name}}</h1>
+			<h1>{{ business.display_phone }}</h1>
+		{% endfor %}
+	</body>
+
+
+	</html>"""
+
+	t = Template(raw_template)
+	c = Context(yelp_python_dict)
 
 	# Accessing python dictionary
-	html = json_yelp_dict['businesses'][0]["name"]
+	# html = yelp_python_dict['businesses'][0]["name"]
 
-	return HttpResponse(html)
+	return HttpResponse(t.render(c))

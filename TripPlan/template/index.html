@@ -1,11 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	
+	<title>Trip Plan</title>	
+<!-- Bootstrap -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<!-- Customized CSS Stylesheet -->
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static "css/custom-style.css" %}" >
+
+<!-- Google Font -->
+<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
 </head>
+
 <body>
-	<h1>Yelp Results</h1>
-	{% %}
+	<div class="pull-left" id="logo">
+		TripPlan!
+	</div>
+	<br />
+
+	<div class="pull-left">
+		<h1><span class="glyphicon glyphicon-search"></span> Search</h1>
+		<form class="form-inline" role="search">
+	 		<div class="form-group">
+	 			<label for="yelpSearch"><img src="http://s3-media4.ak.yelpcdn.com/assets/2/www/img/7e704c57a423/developers/yelp_logo_75x38.png"></label>
+	    		<input type="search" class="form-control" id="yelpSearch" placeholder="Enter Keywords">
+	    		<button type="submit" class="btn btn-default">Search</button>
+	  		</div>
+	  	</form>
+
+		<h1><span class="glyphicon glyphicon-th-list"></span> Results</h1>
+
+		<div class="media">
+		{% for business in businesses %}
+			<a class="pull-left" href="{{ business.url }}">
+				<img class="media-object" src="{{ business.image_url }}">
+			</a>
+			<div class="media-body">
+				<address>
+					<strong>{{ business.name}}</strong>
+					<img src="{{ business.rating_img_url }}" /><br />
+					<span class="glyphicon glyphicon-phone-alt"></span> {{ business.display_phone }}<br />
+					{{ business.location.display_address.0}}<br />
+					{{ business.location.display_address.1}}<br />
+					{{ business.location.display_address.2}}<br />
+					{{ business.location.display_address.3}}
+				</address>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+
+	<div class="pull-left">
+		<h1><span class="glyphicon glyphicon-calendar"></span> Plan</h1>
+	</div>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
 </body>
 
 

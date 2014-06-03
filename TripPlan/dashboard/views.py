@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.conf import settings
 from django.template import Context, loader, Template
+from django.shortcuts import render_to_response
 import oauth2, yaml, urllib, json
 
 # remove below to api.py in yelp
@@ -26,9 +27,7 @@ def index(request):
 	                      'oauth_consumer_key': consumer_key})
 
 	token = oauth2.Token(token, token_secret)
-
 	oauth_request.sign_request(oauth2.SignatureMethod_HMAC_SHA1(), consumer, token)
-
 	signed_url = oauth_request.to_url()
 
 	# Retrive raw yelp data using the signed url
@@ -36,30 +35,13 @@ def index(request):
 	raw_yelp_data = yelp_url_connection.read()
 	yelp_url_connection.close()
 
-	 # Convert json to python dictionary
+	# Convert json to python dictionary
 	yelp_python_dict = json.loads(raw_yelp_data)
 	
-	raw_template = """
-	<head>
-		<title>Yelp Page</title>	
-	</head>
+	# raw_template = 'index.html'
 
-	<body>
-		<h1>Yelp Results </h1>
+	# t = Template(raw_template)
+	# c = Context(yelp_python_dict)
 
-		{% for business in businesses %}
-			<h1>{{ business.name}}</h1>
-			<h1>{{ business.display_phone }}</h1>
-		{% endfor %}
-	</body>
-
-
-	</html>"""
-
-	t = Template(raw_template)
-	c = Context(yelp_python_dict)
-
-	# Accessing python dictionary
-	# html = yelp_python_dict['businesses'][0]["name"]
-
-	return HttpResponse(t.render(c))
+	# apply data to render view
+	return render_to_response('index.html', yelp_python_dict)

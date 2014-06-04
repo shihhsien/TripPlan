@@ -10,4 +10,5 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'TripPlan.dashboard.views.index'),
+    url(r'^search/(?P<location>\w+)/(?P<term>\w+)/$', 'TripPlan.dashboard.views.user_input'),
 )

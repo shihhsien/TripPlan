@@ -1,0 +1,36 @@
+body {
+	padding-left: 1%;
+	background-color: #DDDFD4;
+	color: #4D4D4D;
+}
+
+#logo {
+	font-family: 'Lobster', cursive;
+	font-size: 3em;
+	width: 100%;
+	border-bottom: 10px black;
+}
+
+h2 {
+	font-family: 'Lobster', cursive;
+}
+
+#results-scrollable-div {
+	overflow-y: scroll;
+	height:650px;
+	width: 100%;
+}
+
+/*Dividing the page into left and right*/
+#left-box {
+	width: 400px;
+}
+
+#right-box {
+	padding-left: 1%
+}
+
+#left-search, #right-search {
+	width: 45%;
+	display: inline-block;
+}

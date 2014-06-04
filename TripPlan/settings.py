@@ -81,6 +81,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-HELLO = "hi"
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_DIR, 'static'),
+)
+
 CONFIG = yaml.safe_load(open('config.yaml'))
 TEMPLATE_DIRS = os.path.join(PROJECT_DIR, 'template')

@@ -1,0 +1,16 @@
+{% for business in businesses %}
+			<a class="pull-left" href="{{ business.url }}">
+				<img class="media-object" src="{{ business.image_url }}">
+			</a>
+			<div class="media-body">
+				<address>
+					<a href="{{ business.url }}"><strong>{{ business.name}}</strong></a>
+					<img src="{{ business.rating_img_url }}" /><br />
+					<span class="glyphicon glyphicon-phone-alt"></span> {{ business.display_phone }}<br />
+					{{ business.location.display_address.0}}<br />
+					{{ business.location.display_address.1}}<br />
+					{{ business.location.display_address.2}}<br />
+					{{ business.location.display_address.3}}
+				</address>
+			</div>
+		{% endfor %}

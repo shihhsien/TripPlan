@@ -3,21 +3,19 @@
 
 <head>
 	<title>Trip Plan</title>
-		
+
 <!-- Bootstrap -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <!-- Optional theme -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 <!-- Customized CSS Stylesheet -->
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static "css/custom-style.css" %}" >
 
 <!-- Google Font -->
-<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
 </head>
 
@@ -28,49 +26,38 @@
 
 	<div class="pull-left" id="left-box">
 		<h2><span class="glyphicon glyphicon-search"></span> Search</h2>
-		<form class="form-inline" role="search">
+		<!-- yelp search, changes url after submission -->
+		<form class="form-inline" id="search-form" role="search">
 	 		<div class="form-group">
 	 			<div id="left-search">
 		    		<input type="search" class="form-control" id="yelpSearch-location" placeholder="Location">
 		    		<input type="search" class="form-control" id="yelpSearch-keyword" placeholder="Keywords">
 		    	</div>
 		    	<div id="right-search">
-		    		<button type="submit" class="btn btn-default">Search</button>
+		    		<button type="submit" class="btn btn-default" id="search-btn">Search</button>
 		    		<img src="http://s3-media4.ak.yelpcdn.com/assets/2/www/img/7e704c57a423/developers/yelp_logo_75x38.png">
 		    	</div>
 	  		</div>
 	  	</form>
 
 		<h2><span class="glyphicon glyphicon-th-list"></span> Results</h2>
-
+<!-- Yelp results -->
 		<div class="media"  id="results-scrollable-div">
-		{% for business in businesses %}
-			<a class="pull-left" href="{{ business.url }}">
-				<img class="media-object" src="{{ business.image_url }}">
-			</a>
-			<div class="media-body">
-				<address>
-					<strong>{{ business.name}}</strong>
-					<img src="{{ business.rating_img_url }}" /><br />
-					<span class="glyphicon glyphicon-phone-alt"></span> {{ business.display_phone }}<br />
-					{{ business.location.display_address.0}}<br />
-					{{ business.location.display_address.1}}<br />
-					{{ business.location.display_address.2}}<br />
-					{{ business.location.display_address.3}}
-				</address>
-			</div>
-		{% endfor %}
+			{% include "results.html" %}
 		</div>
 	</div>
 
 	<div class="pull-left" id="right-box">
+		<h2><span class="glyphicon glyphicon-map-marker"></span> Map</h2>
 		<h2><span class="glyphicon glyphicon-calendar"></span> Plan</h2>
 	</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+	<script src="{% static "js/search.js" %}"></script>
 </body>
 
 

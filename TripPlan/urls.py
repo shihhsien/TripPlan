@@ -9,6 +9,10 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+
+    # default page
     url(r'^$', 'TripPlan.dashboard.views.index'),
+
+    # customized yelp search url
     url(r'^search/(?P<location>\w+)/(?P<term>\w+)/$', 'TripPlan.dashboard.views.user_input'),
 )

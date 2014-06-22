@@ -14,5 +14,5 @@ urlpatterns = patterns('',
     url(r'^$', 'TripPlan.dashboard.views.index'),
 
     # customized yelp search url
-    url(r'^search/(?P<location>\w+)/(?P<term>\w+)/$', 'TripPlan.dashboard.views.user_input'),
+    url(r'^search/', 'TripPlan.dashboard.views.user_input'),
 )

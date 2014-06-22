@@ -1,6 +1,5 @@
 from django.conf import settings
-from django.template import Context, loader, Template
-import oauth2, yaml, urllib, json
+import oauth2, urllib, json
 
 def yelp_request(location, term):
 	# Defining API keys provided by Yelp and stored in config.yaml

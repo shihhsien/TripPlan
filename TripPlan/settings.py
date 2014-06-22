@@ -14,6 +14,9 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_DIR = os.path.join(BASE_DIR, 'TripPlan')
 
+# Database settings and API keys
+CONFIG = yaml.safe_load(open('config.yaml'))
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -37,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'TripPlan',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,8 +62,13 @@ WSGI_APPLICATION = 'TripPlan.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': CONFIG['database']['name'],
+        'USER': CONFIG['database']['user'],
+        'PASSWORD': CONFIG['database']['password'],
+        'HOST': CONFIG['database']['host'],
+        'PORT': CONFIG['database']['port'],
+        'CHARSET': CONFIG['database']['charset'],
     }
 }
 
@@ -85,5 +94,4 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_DIR, 'static'),
 )
 
-CONFIG = yaml.safe_load(open('config.yaml'))
 TEMPLATE_DIRS = os.path.join(PROJECT_DIR, 'template')

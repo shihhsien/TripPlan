@@ -1,3 +1,12 @@
+# Database
+database:
+    name: insert_here
+    user: insert_here
+    password: insert_here
+    port: insert_here
+    host: insert_here
+    charset: insert_here
+
 # Yelp
 yelp:
     api:
